@@ -28,7 +28,6 @@ public class ElGamal {
 		int yourKeyLength;
 		String yourPlainText;
 		String OriginalText;
-		SecretKey yourWrappedSecretKey;
 		Scanner myIn = new Scanner(System.in);
 		// use this to store the cipher text
 		byte [] yourCipherText;
@@ -51,9 +50,9 @@ public class ElGamal {
 		System.out.println("please enter your plaintext");
 		yourPlainText = myIn.nextLine();
 
-		//set the plaintext and the secret key
+		//set the plaintext and the key length
 		myEncryption.setThePlainText(yourPlainText);
-		
+		myEncryption.setTheKeyLength(yourKeyLength);
 
 		//perform the encryption
 

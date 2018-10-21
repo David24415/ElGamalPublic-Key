@@ -19,12 +19,13 @@ public class Encryption {
 	private
 	//member variables
 	String thePlainText;
+	int theKeyLength;
 	byte [] theCipherText;
 
 	//member methods
 	void encryptThePlainText() {
 
-		
+
 
 	}
 
@@ -33,8 +34,14 @@ public class Encryption {
 	void setThePlainText(String aPlainText) {
 		thePlainText = aPlainText;
 	}
+	
+	void setTheKeyLength(int aKeylength) {
+		theKeyLength = aKeylength;
+	}
+	
 	byte [] getTheCipherText() {
 
 		return theCipherText;
 	}
+	
 }
