@@ -10,7 +10,13 @@
  * http://www.java2s.com/Tutorial/Java/0490__Security/ElGamalexamplewithrandomkeygeneration.htm
  * use the final lines on this example to implement the decryption
  */
-import javax.crypto.SecretKey;
+
+/*
+ * link to add jar file to eclipse
+ * https://www.edureka.co/community/4028/how-to-import-a-jar-file-in-eclipse
+ */
+import javax.crypto.*;
+import java.security.*;
 
 public class Decryption {
 	

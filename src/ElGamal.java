@@ -6,15 +6,9 @@
  * El Gamal  Implementation
  */
 
-import java.security.InvalidKeyException;
-import java.security.Key;
-import java.security.NoSuchAlgorithmException;
+import java.security.*;
 import java.util.Scanner;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.SecretKey;
+import javax.crypto.*;
 public class ElGamal {
 
 
@@ -22,7 +16,7 @@ public class ElGamal {
 	NoSuchAlgorithmException, 
 	NoSuchPaddingException, 
 	IllegalBlockSizeException, 
-	BadPaddingException 
+	BadPaddingException, NoSuchProviderException 
 	{
 		// TODO Auto-generated method stub
 
@@ -30,7 +24,7 @@ public class ElGamal {
 		String yourPlainText;
 		String OriginalText;
 		Scanner myIn = new Scanner(System.in);
-		// use this to store the cipher text
+		// use this to store the cipher text created from the encryption
 		byte [] yourCipherText;
 		Key yourPrivateKey;
 
@@ -38,16 +32,17 @@ public class ElGamal {
 		Encryption myEncryption = new Encryption() ;
 
 
-		//get the secret key from user
+		//get the key size from user
 		do {
 
-			System.out.println("please enter your key size, making sure it is a "
-					+ "64 byte(8 characters) or 128 byte(16 characters");
-			
+			System.out.println("please enter your key size, making sure it is "
+					+ "256 byte(32 characters) or 512 byte(64 characters) ");
+
 			yourKeyLength = myIn.nextInt();
 
-		}while(yourKeyLength != 64 || yourKeyLength != 128);
+		}while(yourKeyLength != 256 && yourKeyLength != 512);
 
+		myIn.nextLine();
 		//get the plaintext from user
 		System.out.println("please enter your plaintext");
 		yourPlainText = myIn.nextLine();
@@ -60,13 +55,15 @@ public class ElGamal {
 		//returns the private key needed to do the decryption
 		yourPrivateKey = myEncryption.encryptThePlainText();
 
+		//the cipher text
+		yourCipherText = myEncryption.getTheCipherText();
 
+		System.out.println("the resulting cipher text is: " + new String(yourCipherText));
+
+		//do decryption and output plain text here 
+		
 
 		myIn.close();
-
-
-
-
 
 	}
 

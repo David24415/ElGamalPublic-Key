@@ -1,16 +1,6 @@
-import java.security.InvalidKeyException;
-import java.security.Key;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
+import javax.crypto.*;
+import java.security.*;
 
 /*
  * Author : David Dorneau
@@ -25,28 +15,42 @@ public class Encryption {
 	String thePlainText;
 	int theKeyLength;
 	byte [] theCipherText,
-			yourPlainTextInBytes;
+	yourPlainTextInBytes;
 
 	//member methods
-	Key encryptThePlainText() throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
+	Key encryptThePlainText() throws NoSuchAlgorithmException, 
+									NoSuchPaddingException, 
+									InvalidKeyException, 
+									IllegalBlockSizeException, 
+									BadPaddingException, 
+									NoSuchProviderException {
 		
+		//adding BC provider to support ELGamal encryption
+		Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
+
 		yourPlainTextInBytes = thePlainText.getBytes();
-		Cipher cipher = Cipher.getInstance("ElGamal/None/NoPadding");
-		KeyPairGenerator myKeyGen = KeyPairGenerator.getInstance("ElGamal");
-		
+
+		//specifying the scheme type
+		Cipher cipher = Cipher.getInstance("ElGamal/None/NoPadding","BC");
+		KeyPairGenerator myKeyGen = KeyPairGenerator.getInstance("ElGamal","BC");
+
+		//generating random number
 		SecureRandom myRandomNum = new SecureRandom();
-		
+
+		//initialize the keypair using the random number
 		myKeyGen.initialize(theKeyLength, myRandomNum);
 		KeyPair pair = myKeyGen.generateKeyPair();
-		
+
+		//retrieving public and private keys
 		Key publicKey = pair.getPublic();
 		Key privateKey = pair.getPrivate();
-		
-		cipher.init(cipher.ENCRYPT_MODE,publicKey,myRandomNum);
+
+		//performing the encryption
+		cipher.init(Cipher.ENCRYPT_MODE,publicKey,myRandomNum);
 		theCipherText = cipher.doFinal(yourPlainTextInBytes);
+
+		// returning the private key for when the decryption needs to be done
 		return privateKey;
-
-
 
 	}
 
@@ -55,14 +59,14 @@ public class Encryption {
 	void setThePlainText(String aPlainText) {
 		thePlainText = aPlainText;
 	}
-	
+
 	void setTheKeyLength(int aKeylength) {
 		theKeyLength = aKeylength;
 	}
-	
+
 	byte [] getTheCipherText() {
 
 		return theCipherText;
 	}
-	
+
 }
