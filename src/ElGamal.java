@@ -7,6 +7,7 @@
  */
 
 import java.security.InvalidKeyException;
+import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
@@ -31,6 +32,7 @@ public class ElGamal {
 		Scanner myIn = new Scanner(System.in);
 		// use this to store the cipher text
 		byte [] yourCipherText;
+		Key yourPrivateKey;
 
 		//create encryption object
 		Encryption myEncryption = new Encryption() ;
@@ -55,6 +57,8 @@ public class ElGamal {
 		myEncryption.setTheKeyLength(yourKeyLength);
 
 		//perform the encryption
+		//returns the private key needed to do the decryption
+		yourPrivateKey = myEncryption.encryptThePlainText();
 
 
 

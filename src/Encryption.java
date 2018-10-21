@@ -1,5 +1,9 @@
 import java.security.InvalidKeyException;
+import java.security.Key;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -20,10 +24,27 @@ public class Encryption {
 	//member variables
 	String thePlainText;
 	int theKeyLength;
-	byte [] theCipherText;
+	byte [] theCipherText,
+			yourPlainTextInBytes;
 
 	//member methods
-	void encryptThePlainText() {
+	Key encryptThePlainText() throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
+		
+		yourPlainTextInBytes = thePlainText.getBytes();
+		Cipher cipher = Cipher.getInstance("ElGamal/None/NoPadding");
+		KeyPairGenerator myKeyGen = KeyPairGenerator.getInstance("ElGamal");
+		
+		SecureRandom myRandomNum = new SecureRandom();
+		
+		myKeyGen.initialize(theKeyLength, myRandomNum);
+		KeyPair pair = myKeyGen.generateKeyPair();
+		
+		Key publicKey = pair.getPublic();
+		Key privateKey = pair.getPrivate();
+		
+		cipher.init(cipher.ENCRYPT_MODE,publicKey,myRandomNum);
+		theCipherText = cipher.doFinal(yourPlainTextInBytes);
+		return privateKey;
 
 
 

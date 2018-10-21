@@ -5,6 +5,11 @@
  * ElGamal Implementation
  */
 
+
+/*
+ * http://www.java2s.com/Tutorial/Java/0490__Security/ElGamalexamplewithrandomkeygeneration.htm
+ * use the final lines on this example to implement the decryption
+ */
 import javax.crypto.SecretKey;
 
 public class Decryption {
