@@ -1,9 +1,9 @@
 
 /*
  * Authors : David Dorneau & Jammy Jean
- * 10/3/2018
+ * 10/21/2018
  * CIS_5371
- * DES Implementation
+ * El Gamal  Implementation
  */
 
 import java.security.InvalidKeyException;
@@ -25,7 +25,7 @@ public class ElGamal {
 	{
 		// TODO Auto-generated method stub
 
-		String yourSecretKey;
+		int yourKeyLength;
 		String yourPlainText;
 		String OriginalText;
 		SecretKey yourWrappedSecretKey;
@@ -40,10 +40,12 @@ public class ElGamal {
 		//get the secret key from user
 		do {
 
-			System.out.println("please enter your secret key, making sure it is a 64 byte key(8 characters)");
-			yourSecretKey = myIn.nextLine();
+			System.out.println("please enter your key size, making sure it is a "
+					+ "64 byte(8 characters) or 128 byte(16 characters");
+			
+			yourKeyLength = myIn.nextInt();
 
-		}while(yourSecretKey.length() != 8);
+		}while(yourKeyLength != 64 || yourKeyLength != 128);
 
 		//get the plaintext from user
 		System.out.println("please enter your plaintext");
@@ -51,37 +53,11 @@ public class ElGamal {
 
 		//set the plaintext and the secret key
 		myEncryption.setThePlainText(yourPlainText);
-		myEncryption.setTheSecretKey(yourSecretKey);
+		
 
 		//perform the encryption
 
-		//use this secret key object for decryption as well
-		yourWrappedSecretKey = myEncryption.encryptThePlainText();
 
-
-		//output the encrypted message to the user in string format
-		System.out.println("Your resulting cipher text is: " + new String(myEncryption.getTheCipherText()));
-
-		/*use the ciphertext in stored in byte array format, and the secret key 
-		 * object to do the decryption in the decryption class and output to user
-		 * 
-		 */
-
-		//create decryption object
-		Decryption myDecryption = new Decryption() ;
-
-		//set CipherText and the secret key that resulted from the encryption
-		yourCipherText = myEncryption.getTheCipherText();
-		myDecryption.setTheSecretKey(yourWrappedSecretKey);
-		myDecryption.setCipherText(yourCipherText);
-
-		//make sure the decryption scheme knows what the plaintext from the user was
-		myDecryption.setThePlainText(yourPlainText);
-
-		//decrypt the cipherText using the Secret key, and return the resulting plaintext
-		OriginalText = myDecryption.decryptThePlainText();
-
-		System.out.println("\nYour Decrypted text is: " + OriginalText );
 
 		myIn.close();
 
