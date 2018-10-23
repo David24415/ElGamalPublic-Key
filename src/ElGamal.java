@@ -9,14 +9,15 @@
 import java.security.*;
 import java.util.Scanner;
 import javax.crypto.*;
-public class ElGamal {
+public class ElGamal{
 
 
 	public static void main(String[] args) throws InvalidKeyException, 
-	NoSuchAlgorithmException, 
-	NoSuchPaddingException, 
-	IllegalBlockSizeException, 
-	BadPaddingException, NoSuchProviderException 
+											NoSuchAlgorithmException, 
+											NoSuchPaddingException, 
+											IllegalBlockSizeException, 
+											BadPaddingException, 
+											NoSuchProviderException 
 	{
 		// TODO Auto-generated method stub
 
@@ -31,6 +32,8 @@ public class ElGamal {
 		//create encryption object
 		Encryption myEncryption = new Encryption() ;
 
+		//create decryption object
+		Decryption myDecryption = new Decryption();
 
 		//get the key size from user
 		do {
@@ -61,8 +64,15 @@ public class ElGamal {
 		System.out.println("the resulting cipher text is: " + new String(yourCipherText));
 
 		//do decryption and output plain text here 
+		// set the the private Key
+		myDecryption.setThePrivateKey(yourPrivateKey);
 		
-
+		//set the cipher text
+		myDecryption.setCipherText(yourCipherText);
+		
+		//get decrypted text
+		OriginalText = myDecryption.decryptThePlainText();
+		System.out.println("the Original cipher text is: " + OriginalText);
 		myIn.close();
 
 	}
