@@ -1,1 +1,11 @@
 implementation of ElGamalPublic-Key Encryption and Decryption
+
+you can run this program two ways.
+-----------------------------------------------
+1) run the ElGamal windows executable or ElGamal jar file and make sure you have java installed first.
+
+or
+
+2) import the source code, and the bcprovider jar file thats included and create a java project to run the program.
+
+-----------------------------------------------
