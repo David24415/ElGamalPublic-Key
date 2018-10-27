@@ -1,13 +1,14 @@
-
-import javax.crypto.*;
-import java.security.*;
-
 /*
  * Author : David Dorneau
  * 10/20/2018
  * CIS_5371
  * ElGamal Implementation
  */
+
+import javax.crypto.*;
+import java.security.*;
+
+
 public class Encryption {
 
 	private

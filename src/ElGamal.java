@@ -38,8 +38,8 @@ public class ElGamal{
 		//get the key size from user
 		do {
 
-			System.out.println("please enter your key size, making sure it is "
-					+ "256 byte(32 characters) or 512 byte(64 characters) ");
+			System.out.println("please enter your key size(integer value), "
+					+ "256 for a 256-byte key or 512 for a 512-byte key ");
 
 			yourKeyLength = myIn.nextInt();
 
@@ -61,7 +61,8 @@ public class ElGamal{
 		//the cipher text
 		yourCipherText = myEncryption.getTheCipherText();
 
-		System.out.println("the resulting cipher text is: " + new String(yourCipherText));
+		System.out.println("the resulting cipher text is:");
+		System.out.println(new String(yourCipherText));
 
 		//do decryption and output plain text here 
 		// set the the private Key
@@ -72,7 +73,8 @@ public class ElGamal{
 		
 		//get decrypted text
 		OriginalText = myDecryption.decryptThePlainText();
-		System.out.println("the Original cipher text is: " + OriginalText);
+		System.out.println("the Original plain text is:");
+		System.out.println(OriginalText);
 		myIn.close();
 
 	}
